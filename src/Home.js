@@ -1,6 +1,6 @@
 function Home (props){
     return(
-    <h2>Store</h2>
+    <h2 className={"text-center"}>Store</h2>
     )
 }
 export default Home;

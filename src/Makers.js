@@ -1,17 +1,21 @@
-import {Button, ButtonToolbar, Form, Modal, Table} from "react-bootstrap";
 import React, {useState} from "react";
+import {Button, ButtonToolbar, Form, Modal, Table} from "react-bootstrap";
 
-function Categories(props) {
+
+
+function Makers(props) {
+
     const [showModal, setShowModal] = useState(false);
+
+
+
     return (
         <div>
             <Table striped bordered hover>
                 <thead>
                 <tr className={'text-center'}>
-
                     <th>ID</th>
-                    <th>Parent ID</th>
-
+                    <th>Maker Name</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,10 +38,10 @@ function Categories(props) {
                             />
                         </Form.Group>
                         <Form.Group className={"mt-3"}>
-                            <Form.Label>Parent ID</Form.Label>
+                            <Form.Label>Maker Name</Form.Label>
                             <Form.Control
-                                placeholder="Enter Parent ID"
-                                name="parent id"
+                                placeholder="Enter Maker Name"
+                                name="maker name"
                             />
                         </Form.Group>
                         <ButtonToolbar className="justify-content-end mt-3">
@@ -46,10 +50,9 @@ function Categories(props) {
                     </Form>
                 </Modal.Body>
 
-
             </Modal>
         </div>
-    )
+    );
 }
 
-export default Categories;
+export default Makers;

@@ -13,7 +13,7 @@ export default function App() {
               <Nav.Link as={Link} to="/">Home</Nav.Link>
             </Nav.Item>
               <Nav.Item>
-                  <Nav.Link as={Link} to="/products">Products</Nav.Link>
+                  <Nav.Link as={Link} to="/maker">Maker</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                   <Nav.Link as={Link} to="/categories">Categories</Nav.Link>
