@@ -3,9 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Home from "./Home";
-import Makers from "./Makers";
-import Categories from "./Categories";
+import Home from "./components/Home";
+import Makers from "./components/Makers";
+import Categories from "./components/Categories";
 import {Alert} from "react-bootstrap";
 
 ReactDOM.render(

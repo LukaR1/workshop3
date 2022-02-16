@@ -2,10 +2,14 @@ import React, {useState} from "react";
 import {Button, ButtonToolbar, Form, Modal, Table} from "react-bootstrap";
 
 
-
-function Makers(props) {
+export default function Makers(props) {
 
     const [showModal, setShowModal] = useState(false);
+    const [makers, setMakers] = useState([])
+    const [formValue, setFormValue] = useState({
+        makerName: ""
+    });
+
 
 
 
@@ -19,29 +23,33 @@ function Makers(props) {
                 </tr>
                 </thead>
                 <tbody>
-
+                {
+                    makers.map((maker) =>
+                        <tr>
+                            <td>{maker.id}</td>
+                            <td>{maker.makerName}</td>
+                        </tr>
+                    )}
                 </tbody>
             </Table>
+
+
             <Button className={"m-2"} variant="primary" onClick={() => setShowModal(true)}>Add</Button>
+
+
             <Modal show={showModal} onHide={() => setShowModal(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Enter the data</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group>
-                            <Form.Label>ID</Form.Label>
-                            <Form.Control
-                                placeholder="Enter ID"
-                                name="id"
-
-                            />
-                        </Form.Group>
                         <Form.Group className={"mt-3"}>
                             <Form.Label>Maker Name</Form.Label>
                             <Form.Control
                                 placeholder="Enter Maker Name"
-                                name="maker name"
+                                type="name"
+                                value={formValue.makerName}
+                                onChange={event => setFormValue({...formValue, makerName: event.target.value})}
                             />
                         </Form.Group>
                         <ButtonToolbar className="justify-content-end mt-3">
@@ -51,8 +59,8 @@ function Makers(props) {
                 </Modal.Body>
 
             </Modal>
+
         </div>
     );
 }
 
-export default Makers;
