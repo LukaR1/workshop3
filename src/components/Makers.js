@@ -9,7 +9,7 @@ export default function Makers(props) {
     const [showModal, setShowModal] = useState(false);
     const [makers, setMakers] = useState([])
     const [formValue, setFormValue] = useState({
-        makerName: ""
+        maker_name: ""
     });
 
     const getMakers = async () => {
@@ -24,7 +24,7 @@ export default function Makers(props) {
 
     const addMakers = async (e) => {
         e.preventDefault();
-        await api.post('/makers', {maker_name: formValue.makerName});
+        await api.post('/makers', {maker_name: formValue.maker_name});
         await getMakers();
     }
 
@@ -43,7 +43,7 @@ export default function Makers(props) {
                     makers.map((maker) =>
                         <tr key={maker.id}>
                             <td>{maker.id}</td>
-                            <td>{maker.makerName}</td>
+                            <td>{maker.maker_name}</td>
                         </tr>
                     )}
                 </tbody>
@@ -64,12 +64,12 @@ export default function Makers(props) {
                             <Form.Control
                                 placeholder="Enter Maker Name"
                                 type="name"
-                                value={formValue.makerName}
-                                onChange={event => setFormValue({...formValue, makerName: event.target.value})}
+                                value={formValue.maker_name}
+                                onChange={event => setFormValue({...formValue, maker_name: event.target.value})}
                             />
                         </Form.Group>
                         <ButtonToolbar className="justify-content-end mt-3">
-                            <Button type="submit" >
+                            <Button type="submit" onClick={()=>setShowModal(false)} >
                                 Add data
                             </Button>
                         </ButtonToolbar>

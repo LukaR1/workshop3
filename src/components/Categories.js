@@ -81,7 +81,7 @@ export default function Categories(props) {
                             />
                         </Form.Group>
                         <ButtonToolbar className="justify-content-end mt-3">
-                            <Button type="submit" >
+                            <Button type="submit" onClick={()=>setShowModal(false)}>
                                 Add data
                             </Button>
                         </ButtonToolbar>
