@@ -6,8 +6,8 @@ export default function Categories(props) {
     const [showModal, setShowModal] = useState(false);
     const [categories, setCategories] = useState([]);
     const [formValues, setFormValues] = useState({
-        categoryName: "",
-        parentId: ""
+        category_name: "",
+        parent_id: ""
     })
 
      const getCategories = async () => {
@@ -21,7 +21,7 @@ export default function Categories(props) {
 
      const addCategory = async (event) => {
          event.preventDefault();
-         await api.post('/categories',{parentId: formValues.parentId, category_name: formValues.categoryName})
+         await api.post('/categories',{parent_id: formValues.parent_id, category_name: formValues.category_name})
          await getCategories()
      }
 
@@ -45,8 +45,8 @@ export default function Categories(props) {
                     categories.map((category) =>
                         <tr key={category.id}>
                             <td>{category.id}</td>
-                            <td>{category.categoryName}</td>
-                            <td>{category.parentId}</td>
+                            <td>{category.category_name}</td>
+                            <td>{category.parent_id}</td>
                         </tr>
                     )}
                 </tbody>
@@ -67,8 +67,8 @@ export default function Categories(props) {
                             <Form.Control
                                 placeholder="Enter Category"
                                 type="name"
-                                value={formValues.categoryName}
-                                onChange={event => setFormValues({...formValues, categoryName: event.target.value})}
+                                value={formValues.category_name}
+                                onChange={event => setFormValues({...formValues, category_name: event.target.value})}
                             />
                         </Form.Group>
                         <Form.Group className={"mt-3"}>
@@ -76,8 +76,8 @@ export default function Categories(props) {
                             <Form.Control
                                 placeholder="Enter Parent ID"
                                 name="parent id"
-                                value={formValues.parentId}
-                                onChange={event => setFormValues({...formValues, parentId: event.target.value})}
+                                value={formValues.parent_id}
+                                onChange={event => setFormValues({...formValues, parent_id: event.target.value})}
                             />
                         </Form.Group>
                         <ButtonToolbar className="justify-content-end mt-3">
