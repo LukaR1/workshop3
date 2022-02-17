@@ -1,5 +1,6 @@
 import {Button, ButtonToolbar, Form, Modal, Table} from "react-bootstrap";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import api from "../utils/api";
 
 export default function Categories(props) {
     const [showModal, setShowModal] = useState(false);
@@ -8,6 +9,21 @@ export default function Categories(props) {
         categoryName: "",
         parentId: ""
     })
+
+     const getCategories = async () => {
+         const response = await api.get('/categories')
+         setCategories(response.data)
+     }
+
+     useEffect(()=> {
+         getCategories().catch(console.error)
+     },[])
+
+     const addCategory = async (event) => {
+         event.preventDefault();
+         await api.post('/categories',{parentId: formValues.parentId, category_name: formValues.categoryName})
+         await getCategories()
+     }
 
     return (
 
@@ -27,8 +43,8 @@ export default function Categories(props) {
                 <tbody>
                 {
                     categories.map((category) =>
-                        <tr>
-                            <td>{}</td>
+                        <tr key={category.id}>
+                            <td>{category.id}</td>
                             <td>{category.categoryName}</td>
                             <td>{category.parentId}</td>
                         </tr>
@@ -45,7 +61,7 @@ export default function Categories(props) {
                     <Modal.Title>Enter the data</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form onSubmit={addCategory}>
                         <Form.Group>
                             <Form.Label>Category</Form.Label>
                             <Form.Control
@@ -65,7 +81,9 @@ export default function Categories(props) {
                             />
                         </Form.Group>
                         <ButtonToolbar className="justify-content-end mt-3">
-                            <Button type="submit">Add data</Button>
+                            <Button type="submit" >
+                                Add data
+                            </Button>
                         </ButtonToolbar>
                     </Form>
                 </Modal.Body>
@@ -75,6 +93,5 @@ export default function Categories(props) {
 
     )
 }
-
 
 

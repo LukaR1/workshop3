@@ -1,5 +1,7 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, ButtonToolbar, Form, Modal, Table} from "react-bootstrap";
+import api from "../utils/api";
+
 
 
 export default function Makers(props) {
@@ -10,7 +12,21 @@ export default function Makers(props) {
         makerName: ""
     });
 
+    const getMakers = async () => {
+        const res = await api.get('/makers')
+        setMakers(res.data)
+    }
 
+    useEffect(() => {
+        getMakers().catch(console.error)
+    }, [])
+
+
+    const addMakers = async (e) => {
+        e.preventDefault();
+        await api.post('/makers', {maker_name: formValue.makerName});
+        await getMakers();
+    }
 
 
     return (
@@ -25,7 +41,7 @@ export default function Makers(props) {
                 <tbody>
                 {
                     makers.map((maker) =>
-                        <tr>
+                        <tr key={maker.id}>
                             <td>{maker.id}</td>
                             <td>{maker.makerName}</td>
                         </tr>
@@ -42,7 +58,7 @@ export default function Makers(props) {
                     <Modal.Title>Enter the data</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form onSubmit={addMakers}>
                         <Form.Group className={"mt-3"}>
                             <Form.Label>Maker Name</Form.Label>
                             <Form.Control
@@ -53,7 +69,9 @@ export default function Makers(props) {
                             />
                         </Form.Group>
                         <ButtonToolbar className="justify-content-end mt-3">
-                            <Button type="submit">Add data</Button>
+                            <Button type="submit" >
+                                Add data
+                            </Button>
                         </ButtonToolbar>
                     </Form>
                 </Modal.Body>
